@@ -242,14 +242,7 @@ main{
 }
 
 .registration-info {
-    color: var(--gray-light);
-    font-size: 0.75em;
-    text-align: center;
-    margin: 0;
-    padding: 0 20px;
-    max-width: 600px;
-    font-style: italic;
-    line-height: 1.4;
+    display: none;
 }
 
 /* Venue Responsive Versions */
@@ -1616,10 +1609,19 @@ footer a {
 .slideshow-wrapper {
     position: relative;
     width: 100%;
-    height: 90vh;
-    min-height: 700px;
-    max-height: 1100px;
+    height: auto;
+    min-height: 600px;
+    aspect-ratio: 16 / 10;
     overflow: hidden;
+}
+
+/* Desktop - Auto height, fixed width */
+@media (min-width: 1025px) {
+    .slideshow-wrapper {
+        height: auto;
+        aspect-ratio: 16 / 10;
+        min-height: 600px;
+    }
 }
 
 .slide-item {
@@ -1641,7 +1643,7 @@ footer a {
 .slide-image {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     object-position: center;
     display: block;
 }
@@ -1766,15 +1768,23 @@ footer a {
 
 /* ========== EVENT GALLERY RESPONSIVE ========== */
 
+/* Tablet - Fixed height, auto width */
 @media (max-width: 1024px) {
     .event-gallery-section {
         padding: 50px 15px;
     }
 
     .slideshow-wrapper {
-        height: 85vh;
-        min-height: 600px;
-        max-height: 900px;
+        height: 500px;
+        min-height: 500px;
+        aspect-ratio: auto;
+        width: 100%;
+    }
+
+    .slide-image {
+        object-fit: contain;
+        width: 100%;
+        height: 100%;
     }
 }
 
@@ -1795,10 +1805,18 @@ footer a {
         border-radius: 15px;
     }
 
+    /* Mobile - Fixed height, auto width */
     .slideshow-wrapper {
-        height: 70vh;
-        min-height: 500px;
-        max-height: 700px;
+        height: 400px;
+        min-height: 400px;
+        aspect-ratio: auto;
+        width: 100%;
+    }
+
+    .slide-image {
+        object-fit: contain;
+        width: 100%;
+        height: 100%;
     }
 
     .slide-caption {
@@ -1856,10 +1874,18 @@ footer a {
         border-width: 2px;
     }
 
+    /* Small Mobile - Fixed height, auto width */
     .slideshow-wrapper {
-        height: 65vh;
-        min-height: 450px;
-        max-height: 600px;
+        height: 350px;
+        min-height: 350px;
+        aspect-ratio: auto;
+        width: 100%;
+    }
+
+    .slide-image {
+        object-fit: contain;
+        width: 100%;
+        height: 100%;
     }
 
     .slide-overlay {
