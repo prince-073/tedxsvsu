@@ -1826,17 +1826,19 @@ footer a {
 
     .slideshow-prev,
     .slideshow-next {
-        width: 45px;
-        height: 45px;
-        font-size: 22px;
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+        background: rgba(0, 0, 0, 0.7);
+        border-width: 2.5px;
     }
 
     .slideshow-prev {
-        left: 15px;
+        left: 12px;
     }
 
     .slideshow-next {
-        right: 15px;
+        right: 12px;
     }
 
     .slideshow-dots {
@@ -1898,17 +1900,22 @@ footer a {
 
     .slideshow-prev,
     .slideshow-next {
-        width: 40px;
-        height: 40px;
-        font-size: 20px;
+        width: 45px;
+        height: 45px;
+        font-size: 22px;
+        background: rgba(0, 0, 0, 0.75);
+        border-width: 2.5px;
+        /* Better touch target for mobile */
+        min-width: 44px;
+        min-height: 44px;
     }
 
     .slideshow-prev {
-        left: 10px;
+        left: 8px;
     }
 
     .slideshow-next {
-        right: 10px;
+        right: 8px;
     }
 
     .slideshow-dots {
