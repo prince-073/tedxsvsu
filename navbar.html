@@ -1,36 +1,39 @@
 <section class="navbar-section">
-    <nav class="navbar">
-      <div class="logo">
-       <a href="index.html#main"><h1><span class="red">TEDx </span> SVSU</h1></a> 
-        <p>Ideas Worth Sharing</p>
-      </div>
+  <nav class="navbar" aria-label="Primary navigation">
+    <div class="logo">
+      <a href="index.html#main" aria-label="TEDxSVSU home">
+        <h1><span class="red">TEDxSVSU</span></h1>
+      </a>
+      <details class="season-switcher">
+        <summary>Season 2</summary>
+        <div class="season-menu">
+          <a href="index.html#main" class="season-option active-season">
+            <span>Season 2</span>
+            <small>Current chapter</small>
+          </a>
+          <a href="season1-talks.html" class="season-option">
+            <span>Season 1 Talks</span>
+            <small>Watch the archive</small>
+          </a>
+        </div>
+      </details>
+    </div>
 
-      <ul class="menu">
-        <a href="index.html#main" class="navitems">
-          <li>Home</li>
-        </a>
-        <a href="index.html#who-we-are" class="navitems">
-          <li>About</li>
-        </a>
-        <a href="index.html#timeline" class="navitems">
-          <li>Schedule</li>
-        </a>
-        <a href="index.html#partners" class="navitems">
-          <li>Partners</li>
-        </a>
-        <a href="index.html#speakers" class="navitems">
-          <li>Speakers</li>
-        </a>
-        <a href="contact.html" class="navitems">
-          <li>Contact</li>
-        </a>
-      </ul>
+    <ul class="menu">
+      <a href="index.html#who-we-are" class="navitems"><li>About</li></a>
+      <a href="index.html#speakers" class="navitems"><li>Speakers</li></a>
+      <a href="index.html#timeline" class="navitems"><li>Schedule</li></a>
+      <a href="index.html#event-gallery" class="navitems"><li>Gallery</li></a>
+      <a href="index.html#team" class="navitems"><li>Team</li></a>
+    </ul>
 
-      <input type="checkbox" id="checkbox">
-      <label for="checkbox" class="toggle">
-        <div class="bars" id="bar1"></div>
-        <div class="bars" id="bar2"></div>
-        <div class="bars" id="bar3"></div>
-      </label>
-    </nav>
+    <button class="nav-cta register-soon-trigger" type="button">Register Now</button>
+
+    <input type="checkbox" id="checkbox" aria-label="Toggle navigation">
+    <label for="checkbox" class="toggle" aria-hidden="true">
+      <div class="bars" id="bar1"></div>
+      <div class="bars" id="bar2"></div>
+      <div class="bars" id="bar3"></div>
+    </label>
+  </nav>
 </section>

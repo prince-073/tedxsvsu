@@ -1,11 +1,80 @@
+const componentFallbacks = {
+    "navbar-placeholder": `
+      <section class="navbar-section">
+        <nav class="navbar" aria-label="Primary navigation">
+          <div class="logo">
+            <a href="index.html#main" aria-label="TEDxSVSU home">
+              <h1><span class="red">TEDxSVSU</span></h1>
+            </a>
+            <details class="season-switcher">
+              <summary>Season 2</summary>
+              <div class="season-menu">
+                <a href="index.html#main" class="season-option active-season">
+                  <span>Season 2</span>
+                  <small>Current chapter</small>
+                </a>
+                <a href="season1-talks.html" class="season-option">
+                  <span>Season 1 Talks</span>
+                  <small>Watch the archive</small>
+                </a>
+              </div>
+            </details>
+          </div>
+          <ul class="menu">
+            <a href="index.html#who-we-are" class="navitems"><li>About</li></a>
+            <a href="index.html#speakers" class="navitems"><li>Speakers</li></a>
+            <a href="index.html#timeline" class="navitems"><li>Schedule</li></a>
+            <a href="index.html#event-gallery" class="navitems"><li>Gallery</li></a>
+            <a href="index.html#team" class="navitems"><li>Team</li></a>
+          </ul>
+          <button class="nav-cta register-soon-trigger" type="button">Register Now</button>
+          <input type="checkbox" id="checkbox" aria-label="Toggle navigation">
+          <label for="checkbox" class="toggle" aria-hidden="true">
+            <div class="bars" id="bar1"></div>
+            <div class="bars" id="bar2"></div>
+            <div class="bars" id="bar3"></div>
+          </label>
+        </nav>
+      </section>
+    `,
+    "footer-placeholder": `
+      <section class="footer-section">
+        <footer>
+          <div class="footer-copy">
+            <p>Copyright 2026 TEDx Shri Vishwakarma Skill University. All Rights Reserved.</p>
+            <p class="footer-contact">
+              Contact:
+              <a href="tel:+918920985602">+91 8920985602</a>
+              <span>|</span>
+              <a class="footer-email" href="mailto:iaayusharya@gmail.com">iaayusharya@gmail.com</a>
+            </p>
+          </div>
+          <div class="social-icons" aria-label="Social links">
+            <a href="https://www.instagram.com/tedx_svsu/" target="_blank" rel="noreferrer">Instagram</a>
+            <a href="https://www.linkedin.com/company/tedxsvsu/" target="_blank" rel="noreferrer">LinkedIn</a>
+            <a href="contact.html">Contact</a>
+          </div>
+        </footer>
+      </section>
+    `
+};
+
 // Load navbar and footer components
 async function loadComponent(elementId, filePath) {
+    const target = document.getElementById(elementId);
+    if (!target) return;
+
     try {
         const response = await fetch(filePath);
+        if (!response.ok) {
+            throw new Error(`Unable to load ${filePath}`);
+        }
         const html = await response.text();
-        document.getElementById(elementId).innerHTML = html;
+        target.innerHTML = html;
     } catch (error) {
-        console.error(`Error loading ${filePath}:`, error);
+        if (!target.innerHTML.trim() && componentFallbacks[elementId]) {
+            target.innerHTML = componentFallbacks[elementId];
+        }
     }
 }
 
@@ -23,10 +92,18 @@ function initializeNavbar() {
     const checkbox = document.querySelector("#checkbox");
     const menu = document.querySelector(".menu");
     const menuLinks = document.querySelectorAll(".navitems");
+    const navbarSection = document.querySelector(".navbar-section");
+
+    function updateNavState() {
+        if (!navbarSection) return;
+        navbarSection.classList.toggle("nav-scrolled", window.scrollY > 12);
+    }
+
+    updateNavState();
+    window.addEventListener("scroll", updateNavState, { passive: true });
 
     if (checkbox && menu) {
         checkbox.addEventListener("change", () => {
-            console.log("Checkbox changed:", checkbox.checked);
             if (checkbox.checked) {
                 menu.classList.add("activeMenu");
             } else {
@@ -42,6 +119,6 @@ function initializeNavbar() {
             });
         });
     } else {
-        console.error("Checkbox or menu not found");
+        return;
     }
 }
