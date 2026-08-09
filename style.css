@@ -1211,7 +1211,6 @@ body.modal-open {
 
 .soon-modal__link {
   display: inline-flex;
-  margin-top: 28px;
   padding: 12px 16px;
   border: 0.5px solid var(--brand);
   color: var(--brand);
@@ -1221,8 +1220,21 @@ body.modal-open {
   text-transform: uppercase;
 }
 
+.soon-modal__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.soon-modal__link--muted {
+  border-color: rgba(255, 255, 255, 0.16);
+  color: rgba(255, 255, 255, 0.68);
+}
+
 .soon-modal__link:hover {
   background: var(--brand);
+  border-color: var(--brand);
   color: #fff;
 }
 
@@ -1237,6 +1249,16 @@ body.modal-open {
 
   .soon-modal__panel h2 {
     font-size: clamp(34px, 12vw, 54px);
+  }
+
+  .soon-modal__actions,
+  .soon-modal__link {
+    width: 100%;
+  }
+
+  .soon-modal__link {
+    justify-content: center;
+    text-align: center;
   }
 }
 
