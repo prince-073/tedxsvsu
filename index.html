@@ -235,16 +235,27 @@
  
     <section class="speakers-section" id="speakers">
         <h1 class="section-header">Meet Our Speakers</h1>
-        <div class="speaker-reveal" aria-label="Speaker lineup reveal">
-            <p class="speaker-eyebrow">Voices being curated</p>
-            <h3>Season 2 speakers revealing soon</h3>
-            <p>The speaker lineup for <strong>Shaping Tomorrow: From Inspiration to Impact</strong> is being built with care. Names and stories will be unveiled closer to the event.</p>
-            <div class="speaker-reveal-meta" aria-label="Speaker reveal details">
-                <span>Curated talks</span>
-                <span>Fresh voices</span>
-                <span>September 2026</span>
+        <div class="speakers-grid season-two-speakers">
+            <article class="speaker-card">
+                <img src="./assets/kavitha-s.jpg" alt="Kavitha S" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';">
+                <div class="speaker-photo-fallback" aria-hidden="true">KS</div>
+                <div class="overlay">
+                    <div class="speaker-name">Kavitha S</div>
+                    <div class="speaker-designation">Software Enterprise Architect</div>
+                    <p class="speaker-bio">A distinguished Software Enterprise Architect and model by passion from Bengaluru, Kavitha represents a powerful blend of intellect, resilience, and elegance. Crowned Mrs. India 2025, she advocates emotional wellness, self-growth, and women's empowerment.</p>
+                </div>
+            </article>
+
+            <article class="speaker-card">
+                <img src="./assets/manish-anand.jpg" alt="Manish Anand" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';">
+                <div class="speaker-photo-fallback" aria-hidden="true">MA</div>
+                <div class="overlay">
+                    <div class="speaker-name">Manish Anand</div>
+                    <div class="speaker-designation">IT Expert</div>
+                    <p class="speaker-bio">A technologist and community builder, Manish believes innovation becomes meaningful only when it improves lives. His work spans AI-driven solutions, global engineering dialogue, IEEE leadership, mentoring, and community-first impact.</p>
+                </div>
+            </article>
             </div>
-        </div>
     </section>
 <!-- Spkes end -->
 
@@ -274,9 +285,23 @@
             <div class="sponsor-tier">
                 <h2 class="tier-title">Our Partners</h2>
                 <div class="partners-reveal" aria-label="Partners reveal">
-                    <p class="partner-eyebrow">Partnerships in curation</p>
-                    <h3>Partners revealing soon</h3>
-                    <p>Season 2 partner announcements will appear here once collaborations are confirmed.</p>
+                    <p class="partner-eyebrow">Website sponsor</p>
+                    <h3>JackPrints joins Season 2.</h3>
+                    <p>JackPrints is our confirmed website sponsor for TEDxSVSU Season 2. Other partner announcements will be revealed soon.</p>
+                    <div class="confirmed-sponsor-card" aria-label="Confirmed sponsor JackPrints">
+                        <span>01 / Website Sponsor</span>
+                        <strong>JackPrints</strong>
+                        <p>Confirmed partner</p>
+                    </div>
+                    <div class="brochure-spotlight">
+                        <span class="brochure-tag">Season 2 Sponsorship</span>
+                        <strong>Explore the TEDxSVSU partnership brochure</strong>
+                        <p>See the audience, experience, sponsorship opportunities, and brand visibility plan in one cinematic deck.</p>
+                        <div class="brochure-actions">
+                            <a class="brochure-link" href="sponsorship-brochure.html">View brochure page</a>
+                            <a class="brochure-link brochure-link-secondary" href="./assets/tedxsvsu-sponsorship-brochure.pdf" target="_blank" rel="noreferrer">Open PDF</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -521,8 +546,8 @@
 
   <div class="slider">
     <div class="slide-track">
-      <div class="slide"><img src="./Image/Ayush.jpg" alt="Ayush Arya"><div class="info"><h3>Ayush Arya</h3><p>Organizer</p></div></div>
-      <div class="slide"><img src="./Image/Vikramaditya.jpg" alt="Vikramaditya"><div class="info"><h3>Vikramaditya</h3><p>Co Organizer</p></div></div>
+      <div class="slide"><img src="./Image/Ayush.png" alt="Ayush Arya"><div class="info"><h3>Ayush Arya</h3><p>Organizer</p></div></div>
+      <div class="slide"><img src="./Image/Vikramaditya.png" alt="Vikramaditya"><div class="info"><h3>Vikramaditya</h3><p>Co Organizer</p></div></div>
       <div class="slide"><img src="./Image/Dean DSW.jpg" alt="Prof(Dr.) Kulwant Singh"><div class="info"><h3>Prof(Dr.) Kulwant Singh</h3><p>Dean DSW</p></div></div>
       <div class="slide"><img src="./Image/Manish.jpg" alt="Dr. Manish Kumar"><div class="info"><h3>Dr. Manish Kumar</h3><p>Faculty Coordinator</p></div></div>
     </div>
@@ -560,4 +585,3 @@
         }
     </script>
 </html>
-
