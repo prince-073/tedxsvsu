@@ -48,6 +48,10 @@ const componentFallbacks = {
               <span>|</span>
               <a class="footer-email" href="mailto:iaayusharya@gmail.com">iaayusharya@gmail.com</a>
             </p>
+            <p class="visitor-count" aria-live="polite">
+              <span class="visitor-count__label">Live Footfall</span>
+              <span id="visitor-count-value" class="visitor-count__value">Counting soon</span>
+            </p>
           </div>
           <div class="social-icons" aria-label="Social links">
             <a href="https://www.instagram.com/tedx_svsu/" target="_blank" rel="noreferrer">Instagram</a>
@@ -78,10 +82,43 @@ async function loadComponent(elementId, filePath) {
     }
 }
 
+function initializeVisitorCounter() {
+    const counter = document.getElementById("visitor-count-value");
+    if (!counter) return;
+
+    if (window.__tedxVisitorCounterStarted) {
+        return;
+    }
+
+    window.__tedxVisitorCounterStarted = true;
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => controller.abort(), 4500);
+
+    fetch("https://counterapi.com/api/tedxsvsu.in/view/season-2", {
+        signal: controller.signal,
+        cache: "no-store"
+    })
+        .then((response) => {
+            if (!response.ok) throw new Error("Visitor counter unavailable");
+            return response.json();
+        })
+        .then((data) => {
+            const value = Number(data.value);
+            counter.textContent = Number.isFinite(value) ? value.toLocaleString("en-IN") : "Counting soon";
+        })
+        .catch(() => {
+            counter.textContent = "Counting soon";
+        })
+        .finally(() => {
+            window.clearTimeout(timeout);
+        });
+}
+
 // Load components when DOM is ready
 document.addEventListener('DOMContentLoaded', async function() {
     await loadComponent('navbar-placeholder', 'navbar.html');
     await loadComponent('footer-placeholder', 'footer.html');
+    initializeVisitorCounter();
     
     // Initialize navbar functionality after loading
     initializeNavbar();
