@@ -46,7 +46,7 @@ const componentFallbacks = {
               Contact:
               <a href="tel:+918920985602">+91 8920985602</a>
               <span>|</span>
-              <a class="footer-email" href="mailto:iaayusharya@gmail.com">iaayusharya@gmail.com</a>
+              <a class="footer-email" href="mailto:tedx@svsu.ac.in">tedx@svsu.ac.in</a>
             </p>
             <p class="visitor-count" aria-live="polite">
               <span class="visitor-count__label">Live Footfall</span>

@@ -87,7 +87,7 @@ whower.css (already integrated)
 ## 📱 Contact Information
 
 - **Phone:** +91 8920985602
-- **Email:** iaayusharya@gmail.com
+- **Email:** tedx@svsu.ac.in
 - **Instagram:** [@tedx_svsu](https://www.instagram.com/tedx_svsu/)
 - **LinkedIn:** [TEDxSVSU](https://www.linkedin.com/company/tedxsvsu/)
 
