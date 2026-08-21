@@ -48,10 +48,6 @@ const componentFallbacks = {
               <span>|</span>
               <a class="footer-email" href="mailto:tedx@svsu.ac.in">tedx@svsu.ac.in</a>
             </p>
-            <p class="visitor-count" aria-live="polite">
-              <span class="visitor-count__label">Live Footfall</span>
-              <span id="visitor-count-value" class="visitor-count__value">Counting soon</span>
-            </p>
           </div>
           <div class="social-icons" aria-label="Social links">
             <a href="https://www.instagram.com/tedx_svsu/" target="_blank" rel="noreferrer">Instagram</a>

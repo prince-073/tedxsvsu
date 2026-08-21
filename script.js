@@ -551,6 +551,71 @@ function initializeRegisterSoonModal() {
   });
 }
 
+function initializeTeamAutoScroll() {
+  const strips = document.querySelectorAll(".team-leads-grid, .team-core-strip");
+  if (!strips.length) return;
+
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const mobile = window.matchMedia("(max-width: 768px)");
+  let frameId = null;
+
+  function stop() {
+    if (frameId) cancelAnimationFrame(frameId);
+    frameId = null;
+  }
+
+  function start() {
+    stop();
+    if (!mobile.matches || reduceMotion.matches) return;
+
+    let last = performance.now();
+
+    function tick(now) {
+      const delta = Math.min(now - last, 32);
+      last = now;
+
+      strips.forEach((strip, index) => {
+        if (strip.matches(":hover") || strip.dataset.paused === "true") return;
+        const maxScroll = strip.scrollWidth - strip.clientWidth;
+        if (maxScroll <= 0) return;
+
+        strip.scrollLeft += (index === 0 ? 0.065 : 0.082) * delta;
+        if (strip.scrollLeft >= maxScroll - 1) strip.scrollLeft = 0;
+      });
+
+      frameId = requestAnimationFrame(tick);
+    }
+
+    frameId = requestAnimationFrame(tick);
+  }
+
+  strips.forEach((strip) => {
+    strip.dataset.paused = "false";
+    let resumeTimer;
+
+    function pause() {
+      strip.dataset.paused = "true";
+      window.clearTimeout(resumeTimer);
+    }
+
+    function resume() {
+      window.clearTimeout(resumeTimer);
+      resumeTimer = window.setTimeout(() => {
+        strip.dataset.paused = "false";
+      }, 1400);
+    }
+
+    strip.addEventListener("pointerdown", pause, { passive: true });
+    strip.addEventListener("pointerup", resume, { passive: true });
+    strip.addEventListener("pointercancel", resume, { passive: true });
+    strip.addEventListener("touchend", resume, { passive: true });
+  });
+
+  mobile.addEventListener?.("change", start);
+  reduceMotion.addEventListener?.("change", start);
+  start();
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   updateTimer();
   window.setInterval(updateTimer, 1000);
