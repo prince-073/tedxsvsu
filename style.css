@@ -2078,6 +2078,10 @@ body.modal-open {
   min-height: 215px;
 }
 
+.team-card[aria-hidden="true"] {
+  display: none;
+}
+
 .team-card img {
   width: 112px;
   height: 112px;
@@ -4518,6 +4522,10 @@ footer a:hover {
     flex: 0 0 178px;
     min-height: 178px;
     padding: 18px 12px;
+  }
+
+  .team-card[aria-hidden="true"] {
+    display: flex;
   }
 
   .team-core-strip .team-card {
