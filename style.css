@@ -1614,7 +1614,7 @@ body.modal-open {
 
 .industry-partners__grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
   gap: 14px;
 }
 
@@ -1684,6 +1684,15 @@ body.modal-open {
   max-width: 58%;
   max-height: 72px;
   object-position: center;
+}
+
+.industry-partner-card__logo--svsujunction {
+  background: #ffffff;
+}
+
+.industry-partner-card__logo--svsujunction img {
+  max-width: 90%;
+  max-height: 78px;
 }
 
 .industry-partner-card strong {
