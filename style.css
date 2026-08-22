@@ -1687,7 +1687,7 @@ body.modal-open {
 }
 
 .industry-partner-card__logo--svsujunction {
-  background: #ffffff;
+  background: #161616;
 }
 
 .industry-partner-card__logo--svsujunction img {
@@ -2288,6 +2288,24 @@ footer a {
 .social-icons a:hover,
 footer a:hover {
   color: var(--brand);
+}
+
+.footer-archive-link {
+  padding: 9px 12px;
+  border: 0.5px solid rgba(230, 43, 30, 0.55);
+  color: var(--text) !important;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.footer-archive-link:hover {
+  background: var(--brand);
+  border-color: var(--brand);
+  color: #050505 !important;
 }
 
 .contact-wrapper {

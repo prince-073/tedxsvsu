@@ -53,6 +53,7 @@ const componentFallbacks = {
             <a href="https://www.instagram.com/tedx_svsu/" target="_blank" rel="noreferrer">Instagram</a>
             <a href="https://www.linkedin.com/company/tedxsvsu/" target="_blank" rel="noreferrer">LinkedIn</a>
             <a href="contact.html">Contact</a>
+            <a class="footer-archive-link" href="season-1/index.html">Season 1 Website</a>
           </div>
         </footer>
       </section>

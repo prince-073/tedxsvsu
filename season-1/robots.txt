@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /loadComponents.js
+Disallow: /script.js
+
+Sitemap: https://www.tedxsvsu.in/sitemap.xml

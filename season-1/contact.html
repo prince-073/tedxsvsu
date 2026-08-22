@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon/logo-black.png">
+    <link rel="apple-touch-icon" href="favicon/logo-black.png">
+    
+    <!-- SEO Meta Tags -->
+    <title>Contact Us - TEDxSVSU | Get in Touch</title>
+    <meta name="description" content="Contact TEDxSVSU team for queries, partnerships, or speaker opportunities. Reach out to us for TEDx event information at Shri Vishwakarma Skill University.">
+    <meta name="keywords" content="Contact TEDxSVSU, TEDx SVSU Contact, TEDx Inquiry, TEDx Partnership, Speaker Registration, TEDx Support">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Contact Us - TEDxSVSU">
+    <meta property="og:description" content="Get in touch with TEDxSVSU team">
+    <meta property="og:url" content="https://www.tedxsvsu.in/contact.html">
+    <meta property="og:type" content="website">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://www.tedxsvsu.in/contact.html">
+    
+    <link href="style.css" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        emailjs.init("MyTxrFH3YIpVZUfiv");
+    </script>
+</head>
+
+<body style="background:#131313; font-family: 'Poppins', sans-serif;">
+
+    <!-- Navbar Component -->
+    <div id="navbar-placeholder"></div>
+
+    <div class="contact-wrapper">
+
+        <div class="contact-header">
+            <p>Contact Us</p>
+            <span>Have a query? Reach out — our team will guide you</span>
+        </div>
+
+        <form class="contact-box" id="contactForm">
+
+            <input type="text" id="name" class="contact-input" placeholder="Your Full Name" required>
+
+            <input type="email" id="email" class="contact-input" placeholder="Your Email Address" required>
+
+            <textarea id="message" class="contact-input message-box" placeholder="Type Your Message" required></textarea>
+
+            <button class="send-btn" type="submit">Send Message</button>
+
+            <p id="status" class="status"></p>
+
+        </form>
+    </div>
+
+    <!-- Footer Component -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="loadComponents.js"></script>
+    <script>
+        // EmailJS form submission
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById("contactForm").addEventListener("submit", function(e) {
+                e.preventDefault();
+
+                const templateParams = {
+                    from_name: document.getElementById("name").value,
+                    from_email: document.getElementById("email").value,
+                    message: document.getElementById("message").value
+                };
+
+                emailjs.send("service_1w3h22c", "template_9tw2roi", templateParams)
+                    .then(() => {
+                        document.getElementById("status").innerHTML = "✅ Message Sent Successfully!";
+                        document.getElementById("status").style.color = "#4CAF50";
+                        document.getElementById("contactForm").reset();
+                    })
+                    .catch((error) => {
+                        document.getElementById("status").innerHTML = "❌ Failed to Send Message. Error: " + error.text;
+                        document.getElementById("status").style.color = "#e62b1e";
+                        console.error("EmailJS Error:", error);
+                        console.error("Service ID: service_1w3h22c");
+                        console.error("Template ID: template_9tw2roi");
+                        console.error("Public Key: MyTxrFH3YIpVZUfiv");
+                    });
+            });
+        });
+    </script>
+
+</body>
+
+</html>
