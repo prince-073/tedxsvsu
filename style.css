@@ -2498,6 +2498,11 @@ body.modal-open {
   line-height: 1;
 }
 
+.chapter-profile[aria-hidden="true"],
+.chapter-slot[aria-hidden="true"] {
+  display: none;
+}
+
 .footer-section {
   border-top: 0;
 }
@@ -4967,55 +4972,120 @@ footer a:hover {
   }
 
   .chapters-shell {
-    padding: 92px 0 56px;
+    padding: 72px 0 42px;
+    background:
+      radial-gradient(circle at 82% 5%, rgba(230, 43, 30, 0.16), transparent 28%),
+      linear-gradient(180deg, rgba(230, 43, 30, 0.08), transparent 220px),
+      #050505;
   }
 
   .chapters-hero {
     min-height: 0;
-    padding: 28px 24px 26px;
+    padding: 28px 22px 20px;
+    border-bottom: 0.5px solid rgba(255, 255, 255, 0.08);
   }
 
   .chapters-hero h1 {
-    font-size: clamp(52px, 17vw, 78px);
+    margin: 10px 0 12px;
+    font-size: clamp(48px, 15vw, 68px);
+    line-height: 0.88;
   }
 
   .chapters-hero__lead {
-    font-size: clamp(26px, 8vw, 40px);
+    max-width: 340px;
+    font-size: clamp(24px, 7.5vw, 34px);
   }
 
   .chapters-hero__note {
+    max-width: 330px;
+    margin-top: 14px;
     font-size: 12px;
+    line-height: 1.65;
   }
 
   .chapters-nav {
     top: 45px;
-    padding: 10px 24px 18px;
+    padding: 10px 18px 12px;
+    border-bottom: 0.5px solid rgba(255, 255, 255, 0.08);
+    background: rgba(5, 5, 5, 0.86);
+    backdrop-filter: blur(12px);
+  }
+
+  .chapters-nav a {
+    padding: 9px 10px;
+    border-color: rgba(230, 43, 30, 0.28);
+    background: rgba(230, 43, 30, 0.045);
+    font-size: 9px;
   }
 
   .chapter-section {
-    margin-top: 14px;
+    width: calc(100% - 24px);
+    margin: 14px auto 0;
     grid-template-columns: 1fr;
-    border-right: 0;
-    border-left: 0;
+    overflow: hidden;
+    border: 0.5px solid rgba(255, 255, 255, 0.1);
+    background:
+      linear-gradient(180deg, rgba(230, 43, 30, 0.08), rgba(255, 255, 255, 0.015) 42%, rgba(0, 0, 0, 0.1)),
+      #080808;
   }
 
   .chapter-header {
-    padding: 24px;
+    padding: 20px 18px 16px;
     border-right: 0;
     border-bottom: 0.5px solid rgba(255, 255, 255, 0.09);
   }
 
+  .chapter-header span {
+    font-size: 8px;
+    letter-spacing: 0.15em;
+  }
+
   .chapter-header h2 {
-    font-size: clamp(34px, 11vw, 52px);
+    margin: 10px 0 8px;
+    font-size: clamp(30px, 10vw, 44px);
+    line-height: 0.98;
+  }
+
+  .chapter-header p {
+    max-width: 310px;
+    font-size: 11px;
+    line-height: 1.55;
+  }
+
+  .chapter-grid {
+    display: block;
   }
 
   .chapter-leads,
   .chapter-members,
   .chapter-members--people {
     display: flex;
+    gap: 0;
+    padding: 0;
     overflow-x: auto;
     scroll-snap-type: inline mandatory;
     scrollbar-width: none;
+  }
+
+  .chapter-leads {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: stretch;
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+
+  .chapter-members--people {
+    width: max-content;
+    overflow: visible;
+    scroll-snap-type: none;
+    animation: chapter-members-marquee 22s linear infinite;
+  }
+
+  .chapter-members:not(.chapter-members--people) {
+    justify-content: center;
+    overflow: visible;
   }
 
   .chapter-leads::-webkit-scrollbar,
@@ -5025,29 +5095,94 @@ footer a:hover {
 
   .chapter-profile,
   .chapter-slot {
-    flex: 0 0 178px;
-    min-height: 178px;
-    padding: 18px 12px;
+    flex: 0 0 152px;
+    min-height: 152px;
+    padding: 16px 10px;
     scroll-snap-align: start;
+    border-bottom: 0;
+    background: rgba(255, 255, 255, 0.012);
+  }
+
+  .chapter-profile[aria-hidden="true"],
+  .chapter-slot[aria-hidden="true"] {
+    display: grid;
   }
 
   .chapter-profile--head {
-    flex-basis: 210px;
-    min-height: 210px;
+    width: 100%;
+    max-width: none;
+    min-height: 112px;
+    padding: 18px;
+    display: flex;
+    flex: none;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 16px;
+    text-align: left;
+    border-right: 0;
+    background:
+      radial-gradient(circle at 16% 45%, rgba(230, 43, 30, 0.2), transparent 42%),
+      rgba(230, 43, 30, 0.045);
   }
 
   .chapter-profile img {
-    width: 82px;
-    height: 82px;
+    width: 72px;
+    height: 72px;
+    box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.025);
   }
 
   .chapter-profile--head img {
-    width: 96px;
-    height: 96px;
+    width: 86px;
+    height: 86px;
+    flex: 0 0 86px;
+  }
+
+  .chapter-profile small,
+  .chapter-slot span {
+    font-size: 7px;
+    letter-spacing: 0.13em;
+  }
+
+  .chapter-profile h3 {
+    font-size: 12px;
+  }
+
+  .chapter-profile--head h3 {
+    margin-top: 3px;
+    font-size: 17px;
+    line-height: 1.1;
+  }
+
+  .chapter-profile p,
+  .chapter-slot p {
+    font-size: 9px;
+    line-height: 1.35;
+  }
+
+  .chapter-profile--head p {
+    margin-top: 4px;
+    font-size: 10px;
+  }
+
+  .chapter-meta {
+    display: block;
+    margin-top: 8px;
+    color: rgba(255, 255, 255, 0.42);
+    font-family: var(--font-mono);
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    line-height: 1.35;
+    text-transform: uppercase;
   }
 
   .chapter-slot strong {
-    font-size: 26px;
+    font-size: 22px;
+  }
+
+  .chapter-members--people:hover,
+  .chapter-members--people:active {
+    animation-play-state: paused;
   }
 }
 
@@ -5061,9 +5196,20 @@ footer a:hover {
   }
 }
 
+@keyframes chapter-members-marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 @media (max-width: 768px) and (prefers-reduced-motion: reduce) {
   .team-leads-grid,
-  .team-core-strip {
+  .team-core-strip,
+  .chapter-members--people {
     animation: none;
     overflow-x: auto;
   }
