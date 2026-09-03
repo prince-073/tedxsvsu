@@ -1,4 +1,4 @@
-const targetDate = null;
+const targetDate = new Date("2026-09-16T09:00:00+05:30");
 
 function setValue(selector, value) {
   const element = document.querySelector(selector);
@@ -551,6 +551,200 @@ function initializeRegisterSoonModal() {
   });
 }
 
+function initializeDateReveal() {
+  const reveal = document.querySelector(".date-reveal");
+  if (!reveal) return;
+
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  window.setTimeout(() => reveal.classList.add("is-revealed"), 420);
+  if (!reduceMotion) window.setTimeout(initializeDateConfetti, 620);
+}
+
+function initializeDateConfetti() {
+  const canvas = document.getElementById("date-confetti");
+  const reveal = document.querySelector(".date-reveal");
+  if (!canvas || !reveal) return;
+
+  const ctx = canvas.getContext("2d");
+  const colors = ["#ff1744", "#ffd600", "#00e5ff", "#76ff03", "#ff4fd8", "#ff9100", "#ffffff"];
+  const flakes = [];
+  const ribbons = [];
+  let width = 0;
+  let height = 0;
+  let ratio = window.devicePixelRatio || 1;
+  let frameId = null;
+  let start = performance.now();
+
+  function resize() {
+    const rect = reveal.getBoundingClientRect();
+    width = Math.max(1, rect.width);
+    height = Math.max(1, rect.height);
+    ratio = window.devicePixelRatio || 1;
+    canvas.width = Math.floor(width * ratio);
+    canvas.height = Math.floor(height * ratio);
+    ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+  }
+
+  function createFlake(side) {
+    const fromLeft = side === "left";
+    const angle = (fromLeft ? -34 : -146) + (Math.random() * 48 - 24);
+    const speed = 3.2 + Math.random() * 5.2;
+    const radians = angle * Math.PI / 180;
+
+    return {
+      x: fromLeft ? 18 : width - 18,
+      y: height - 22 + Math.random() * 18,
+      vx: Math.cos(radians) * speed,
+      vy: Math.sin(radians) * speed,
+      gravity: 0.08 + Math.random() * 0.08,
+      rotation: Math.random() * Math.PI,
+      spin: (Math.random() - 0.5) * 0.34,
+      size: 5 + Math.random() * 9,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      shape: Math.random() > 0.24 ? "rect" : "circle",
+      life: 1,
+      decay: 0.006 + Math.random() * 0.006
+    };
+  }
+
+  function createRibbon(side) {
+    const fromLeft = side === "left";
+    const color = colors[Math.floor(Math.random() * (colors.length - 1))];
+    const x = fromLeft ? 4 + Math.random() * 34 : width - 38 + Math.random() * 34;
+    const y = height - 20 - Math.random() * 42;
+    const vx = (fromLeft ? 1 : -1) * (2.8 + Math.random() * 2.6);
+    const vy = -(3.7 + Math.random() * 2.8);
+
+    return {
+      points: Array.from({ length: 18 }, (_, index) => ({
+        x: x - (fromLeft ? index * 5 : -index * 5),
+        y: y + index * 4
+      })),
+      vx,
+      vy,
+      gravity: 0.055 + Math.random() * 0.045,
+      wave: Math.random() * Math.PI * 2,
+      waveSpeed: 0.14 + Math.random() * 0.08,
+      waveSize: 7 + Math.random() * 10,
+      color,
+      width: 5 + Math.random() * 4,
+      life: 1,
+      decay: 0.0036 + Math.random() * 0.002
+    };
+  }
+
+  function burst() {
+    for (let index = 0; index < 110; index += 1) {
+      flakes.push(createFlake(index % 2 === 0 ? "left" : "right"));
+    }
+    for (let index = 0; index < 7; index += 1) {
+      ribbons.push(createRibbon(index % 2 === 0 ? "left" : "right"));
+    }
+  }
+
+  function drawFlake(flake) {
+    ctx.save();
+    ctx.globalAlpha = Math.max(0, flake.life);
+    ctx.translate(flake.x, flake.y);
+    ctx.rotate(flake.rotation);
+    ctx.fillStyle = flake.color;
+
+    if (flake.shape === "circle") {
+      ctx.beginPath();
+      ctx.arc(0, 0, flake.size * 0.45, 0, Math.PI * 2);
+      ctx.fill();
+    } else {
+      ctx.fillRect(-flake.size * 0.5, -flake.size * 0.28, flake.size, flake.size * 0.56);
+    }
+
+    ctx.restore();
+  }
+
+  function drawRibbon(ribbon) {
+    ctx.save();
+    ctx.globalAlpha = Math.max(0, ribbon.life);
+    ctx.strokeStyle = ribbon.color;
+    ctx.lineWidth = ribbon.width;
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
+    ctx.shadowColor = ribbon.color;
+    ctx.shadowBlur = 10;
+    ctx.beginPath();
+
+    ribbon.points.forEach((point, index) => {
+      if (index === 0) {
+        ctx.moveTo(point.x, point.y);
+      } else {
+        const previous = ribbon.points[index - 1];
+        ctx.quadraticCurveTo(previous.x, previous.y, (previous.x + point.x) / 2, (previous.y + point.y) / 2);
+      }
+    });
+
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  function frame(now) {
+    ctx.clearRect(0, 0, width, height);
+
+    for (let index = ribbons.length - 1; index >= 0; index -= 1) {
+      const ribbon = ribbons[index];
+      ribbon.vy += ribbon.gravity;
+      ribbon.wave += ribbon.waveSpeed;
+      ribbon.life -= ribbon.decay;
+
+      ribbon.points.forEach((point, pointIndex) => {
+        const lag = pointIndex * 0.08;
+        point.x += ribbon.vx + Math.sin(ribbon.wave + lag) * 0.9;
+        point.y += ribbon.vy + Math.cos(ribbon.wave + lag) * 0.35;
+        point.x += Math.sin(ribbon.wave + pointIndex * 0.6) * ribbon.waveSize * 0.045;
+      });
+
+      drawRibbon(ribbon);
+
+      const head = ribbon.points[0];
+      if (ribbon.life <= 0 || head.y > height + 80 || head.x < -120 || head.x > width + 120) {
+        ribbons.splice(index, 1);
+      }
+    }
+
+    for (let index = flakes.length - 1; index >= 0; index -= 1) {
+      const flake = flakes[index];
+      flake.vy += flake.gravity;
+      flake.x += flake.vx;
+      flake.y += flake.vy;
+      flake.rotation += flake.spin;
+      flake.life -= flake.decay;
+      drawFlake(flake);
+
+      if (flake.life <= 0 || flake.y > height + 28 || flake.x < -28 || flake.x > width + 28) {
+        flakes.splice(index, 1);
+      }
+    }
+
+    if (now - start < 3200 || flakes.length || ribbons.length) {
+      frameId = requestAnimationFrame(frame);
+    } else {
+      ctx.clearRect(0, 0, width, height);
+      frameId = null;
+    }
+  }
+
+  resize();
+  burst();
+  frameId = requestAnimationFrame(frame);
+
+  window.addEventListener("resize", () => {
+    resize();
+    if (!frameId) {
+      start = performance.now();
+      burst();
+      frameId = requestAnimationFrame(frame);
+    }
+  }, { passive: true });
+}
+
 function initializeTeamAutoScroll() {
   const strips = document.querySelectorAll(".team-leads-grid, .team-core-strip");
   if (!strips.length) return;
@@ -626,5 +820,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initializeHeroStars();
   initMagicText();
   initializeRegisterSoonModal();
+  initializeDateReveal();
   initializeCursor();
 });
