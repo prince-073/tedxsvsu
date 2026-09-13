@@ -810,6 +810,34 @@ function initializeTeamAutoScroll() {
   start();
 }
 
+function initializeScheduleTabs() {
+  const tabs = document.querySelectorAll(".schedule-tab");
+  if (!tabs.length) return;
+
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      tabs.forEach((t) => t.classList.remove("active"));
+      tab.classList.add("active");
+
+      const target = tab.dataset.target;
+      const rows = document.querySelectorAll(".schedule-row, .schedule-phase-header");
+
+      rows.forEach((row) => {
+        if (target === "all") {
+          row.style.display = "";
+        } else {
+          const session = row.dataset.session;
+          if (session === target) {
+            row.style.display = "";
+          } else {
+            row.style.display = "none";
+          }
+        }
+      });
+    });
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   updateTimer();
   window.setInterval(updateTimer, 1000);
@@ -822,4 +850,5 @@ document.addEventListener("DOMContentLoaded", () => {
   initializeRegisterSoonModal();
   initializeDateReveal();
   initializeCursor();
+  initializeScheduleTabs();
 });
