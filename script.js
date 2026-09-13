@@ -47,7 +47,7 @@ function updateTimer() {
 
 function initializePageMotion() {
   const sections = document.querySelectorAll(
-    ".main-section, .stats-bar, .manifesto-section, .experience-strip, .speakers-section, .timeline-section, .sponsors-section, .who-we-are, .event-gallery-section, .season-archive, .organizers-section"
+    ".main-section, .stats-bar, .manifesto-section, .experience-strip, .speakers-section, .sponsors-section, .who-we-are, .event-gallery-section, .season-archive, .organizers-section"
   );
 
   sections.forEach((section) => section.classList.add("fade-in"));
@@ -61,10 +61,23 @@ function initializePageMotion() {
         }
       });
     },
-    { threshold: 0.12 }
+    { threshold: 0.02, rootMargin: "50px 0px" }
   );
 
-  sections.forEach((section) => observer.observe(section));
+  sections.forEach((section) => {
+    observer.observe(section);
+    const rect = section.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      section.classList.add("visible");
+      observer.unobserve(section);
+    }
+  });
+
+  const timeline = document.querySelector(".timeline-section");
+  if (timeline) {
+    timeline.classList.remove("fade-in");
+    timeline.classList.add("visible");
+  }
 }
 
 function initializeCursor() {
